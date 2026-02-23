@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abhishek Shankar — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="navbar" id="navbar">
+    <a href="#hero" class="nav-logo">AS</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <p class="hero-greeting">Hello, I'm</p>
+      <h1 class="hero-name">Abhishek Shankar</h1>
+      <p class="hero-tagline">AI Data Scientist &bull;  Generative AI Enthusiast &bull; Lifelong Learner</p>
+      <p class="hero-description">
+        I work as an AI Engineer in the interection if AI and Healthcare.
+        My main focus is on learning, building and exploring trends in the field of AI and Data.
+        Outside of work I love my music, movies and enjoy being based in the Bay Area.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">See My Work</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="AbhishekShankar.jpg" alt="Abhishek Shankar" class="hero-photo" />
+    </div>
+  </section>
+
+  <!-- ==================== JOURNEY ==================== -->
+  <section class="section" id="journey">
+    <div class="container">
+      <h2 class="section-title fade-in">My Journey</h2>
+      <p class="section-subtitle fade-in">A quick look at where I've been and what shaped me.</p>
+
+      <div class="timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">August 2019 – March 2020</span>
+            <h3>Data Science Intern at <a href="https://www.positiveintegers.com/" target="_blank" rel="noopener">Positive Integers</a></h3>
+            <p>Right after my undergrad from SRM University, I joined Positive Integers as a data science intern. I worked on some great projects and was an excellent introduction to the world of data science.</p>
+            <div class="timeline-expandable" id="pi-details" hidden>
+              <p class="timeline-expand-title">What I worked on:</p>
+              <ul class="timeline-expand-list">
+                <li>Data discovery and pipeline work</li>
+                <li>Building dashboards and reports</li>
+                <li>Supporting analytics and model workflows</li>
+              </ul>
+            </div>
+            <button type="button" class="timeline-view-more" id="pi-toggle" aria-expanded="false" aria-controls="pi-details">
+              View more
+            </button>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">March 2020 - June 2022</span>
+            <h3>Data Scientist at <a href="https://www.thurro.com/" target="_blank" rel="noopener">Adqvest</a> <span class="timeline-rebrand">(now Thurro)</span></h3>
+            <p>My first full-time role was at Adqvest, which has since rebranded as Thurro. I grew a lot here and got to work on real world projects from ideation to deployment.</p>
+            <div class="timeline-expandable" id="adqvest-details" hidden>
+              <p class="timeline-expand-title">What I worked on:</p>
+              <ul class="timeline-expand-list">
+                <li>Add your key responsibilities and projects here</li>
+                <li>Another thing you worked on</li>
+              </ul>
+            </div>
+            <button type="button" class="timeline-view-more" id="adqvest-toggle" aria-expanded="false" aria-controls="adqvest-details">
+              View more
+            </button>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">September 2022</span>
+            <h3>Back to School - MS in Information Systems @ Northeastern University</h3>
+            <p>I went back to school to learn get more theoretical knowledge in Machine Learning and Data Science.</p>
+            <div class="timeline-expandable" id="neu-details" hidden>
+              <p class="timeline-expand-title">Some of my favourite subjects:</p>
+              <ul class="timeline-expand-list">
+                <li>Machine Learning</li>
+                <li>Data Science</li>
+                <li>Add more subjects you loved</li>
+              </ul>
+            </div>
+            <button type="button" class="timeline-view-more" id="neu-toggle" aria-expanded="false" aria-controls="neu-details">
+              View more
+            </button>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">July 2023 - December 2023</span>
+            <h3>Data Scientist Co-op @ Boehringer Ingelheim</h3>
+            <p>I joined Boehringer Ingelheim as a Data Scientist Co-op Fall 2023. I had to opportunnity to work with some great teams across Germany and North America</p>
+            <div class="timeline-expandable" id="neu-details" hidden>
+              <p class="timeline-expand-title">Projects I worked on:</p>
+              <ul class="timeline-expand-list">
+                <li>Predictive Modeling for Clinical Trials</li>
+                <li>Data Visualization and Reporting</li>
+                <li>Data Engineering and Pipeline Optimization</li>
+              </ul>
+            </div>
+            <button type="button" class="timeline-view-more" id="neu-toggle" aria-expanded="false" aria-controls="neu-details">
+              View more
+            </button>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">May 2024</span>
+            <h3>Wrapped up my masters</h3>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">December 2024 - Present</span>
+            <h3>AI Data Scientist @ Rhythm X AI</h3>
+            <p>I joined Enable Data as an AI Data Scientist Consulant. My client being Rhythm X AI, I created new features for the Rhythm X AI platform integrating GenAI models with healthcare data.</p>
+            <div class="timeline-expandable" id="neu-details" hidden>
+              <p class="timeline-expand-title">What I worked on:</p>
+              <ul class="timeline-expand-list">
+                <li>Integration of GenAI models with healthcare data</li>
+                <li>Building new features for the Rhythm X AI platform</li>
+                <li>Working with the Rhythm X AI team to improve the platform</li>
+              </ul>
+            </div>
+            <button type="button" class="timeline-view-more" id="neu-toggle" aria-expanded="false" aria-controls="neu-details">
+              View more
+            </button>
+          </div>
+        </div>
+
+  </section>
+
+  <!-- ==================== PROJECTS ==================== -->
+  <section class="section section-alt" id="projects">
+    <div class="container">
+      <h2 class="section-title fade-in">Projects</h2>
+      <p class="section-subtitle fade-in">A few things I've built that I'm proud of.</p>
+
+      <div class="projects-grid">
+        <div class="project-card fade-in">
+          <div class="project-icon">&#128640;</div>
+          <h3>Project Alpha</h3>
+          <p>A web app that helps people track their daily habits and build better routines. Built with modern web technologies.</p>
+          <div class="project-tags">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">View Project &rarr;</a>
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-icon">&#9889;</div>
+          <h3>Project Beta</h3>
+          <p>An automation tool that saves hours of manual work by streamlining repetitive tasks into simple one-click actions.</p>
+          <div class="project-tags">
+            <span>Python</span><span>APIs</span><span>Automation</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">View Project &rarr;</a>
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-icon">&#127912;</div>
+          <h3>Project Gamma</h3>
+          <p>A creative side project exploring generative art and interactive visuals using code as the brush and the browser as the canvas.</p>
+          <div class="project-tags">
+            <span>Canvas</span><span>Creative Coding</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">View Project &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== INTERESTS ==================== -->
+  <section class="section" id="interests">
+    <div class="container">
+      <h2 class="section-title fade-in">Beyond Code</h2>
+      <p class="section-subtitle fade-in">Things I enjoy when I'm not staring at a screen.</p>
+
+      <div class="interests-grid">
+        <div class="interest-card fade-in">
+          <div class="interest-icon">&#128218;</div>
+          <h3>Biking</h3>
+          <p>Ive biked in Boston, San Fransisco, Chicago and now around Mountain View. I think its a great way to stay fit and explore new places.</p>
+          <!-- Add a link when you have one; remove the whole <a> block if you don't -->
+          <!-- <a href="https://www.strava.com/athletes/" target="_blank" rel="noopener" class="interest-link">My Strava &rarr;</a> -->
+        </div>
+
+        <div class="interest-card fade-in">
+          <div class="interest-icon">&#127928;</div>
+          <h3>Music</h3>
+          <p>Music is a big part of my everyday life. I love listening to new music and discovering new artists and enjoy singing for my friends and family.</p>
+          <a href="https://open.spotify.com/user/hf29e78ok1xd2yt29xub9lfcl?si=11e8ee98f42d4eb2" target="_blank" rel="noopener" class="interest-link">My Curated Playlist &rarr;</a>
+        </div>
+
+        <div class="interest-card fade-in">
+          <div class="interest-icon">&#127956;</div>
+          <h3>Travel & Outdoors</h3>
+          <p>I recharge by exploring new places, hiking trails, and getting lost in nature or concrete jungles whenever I can.</p>
+          <!-- Add a link (e.g. blog, photos): <a href="URL" target="_blank" rel="noopener" class="interest-link">See more &rarr;</a> -->
+        </div>
+
+        <div class="interest-card fade-in">
+          <div class="interest-icon">&#9749;</div>
+          <h3>Coffee & Conversations</h3>
+          <p>I am a social animal and some of my best ideas have come from a good cup of coffee and a great conversation with interesting people.</p>
+          <!-- No link for this one; add one above if you like -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section class="section section-alt" id="contact">
+    <div class="container contact-container">
+      <h2 class="section-title fade-in">Let's Connect</h2>
+      <p class="section-subtitle fade-in">Have an idea, a question, or just want to say hello? I'd love to hear from you.</p>
+
+      <div class="contact-links fade-in">
+        <a href="mailto:abhishekshankar88@gmail.com" class="contact-link">
+          <span class="contact-link-icon">&#9993;</span>
+          <span>abhishekshankar88@gmail.com</span>
+        </a>
+        <a href="https://github.com/abhi7991" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">&#128187;</span>
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/abhishekshankar97/" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">&#128101;</span>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://substack.com/@abhishekshankar1" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">&#128172;</span>
+          <span>SubStack</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <p>&copy; 2026 Abhishek Shankar. Built with curiosity and vibes (Claude Opus 4.6).</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
