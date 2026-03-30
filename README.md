@@ -1,46 +1,39 @@
-# Personal Portfolio Website
+# 🚀 Personal Portfolio: Abhishek Shankar
 
-A clean, modern single-page portfolio built with plain HTML, CSS, and JavaScript — no frameworks, no build tools.
+A clean, minimalist single-page portfolio designed to showcase a journey from Chennai to Silicon Valley. Built with **pure HTML, CSS, and JavaScript**—zero frameworks, zero dependencies, and lightning-fast load times.
 
-## How to View
+---
 
-Just open `index.html` in any web browser. That's it — no installation needed.
+## 👤 About Me
+I am an **AI Engineer** based in Mountain View, CA, currently consulting for **RhythmX AI**. My work sits at the intersection of healthcare and artificial intelligence, fueled by a lifelong passion for learning and a "hardcore Chennai boy" spirit.
 
-## How to Customize
+## 🛠️ Tech Stack
+* **Frontend:** Semantic HTML5, Modern CSS3 (Flexbox/Grid), Vanilla JavaScript.
+* **Philosophy:** No build tools, no `node_modules`, just clean code that works in any browser.
 
-### Your Name & Info
-Open `index.html` and update these things:
-- **Name** — search for "Abhishek Shankar" and replace with your name
-- **Tagline** — edit the line that says "Developer • Creator • Lifelong Learner"
-- **Description** — update the short bio in the hero section
+---
 
-### Your Journey
-Find the `<!-- JOURNEY -->` section and edit the timeline items. Each item has:
-- A **year**
-- A **title**
-- A **description**
+## 🎨 How to Customize
 
-Add or remove `timeline-item` blocks as needed.
+### 1. Identity & Bio
+Open `index.html` to update your core vitals:
+* **Name:** Locate `Abhishek Shankar` and replace if needed.
+* **Tagline:** Currently set to **Developer • Creator • Lifelong Learner**.
+* **Hero Section:** Update the bio to reflect your latest work in AI and healthcare.
 
-### Your Projects
-Find the `<!-- PROJECTS -->` section. Each project card has:
-- An **emoji icon** (swap with any emoji you like)
-- A **title** and **description**
-- **Tags** for technologies used
-- A **link** to the live project or repo
+### 2. The Professional Journey
+Navigate to the `` section. This is where you can document your transition from **Boehringer Ingelheim** to **RhythmX AI**. 
+* Each `timeline-item` contains a **Year**, **Title**, and **Description**.
 
-### Your Interests
-Find the `<!-- INTERESTS -->` section. Each card has an emoji, title, and short description. Add or remove cards to match your hobbies.
+### 3. Projects & Interests
+* **Projects:** Update the `` section with your latest AI models or data science repositories. Use the `tags` to highlight libraries like PyTorch or Scikit-learn.
+* **Interests:** In the `` section, you can swap cards to highlight your love for **Bollywood**, **70s Rock**, or your **F45** fitness journey.
 
-### Contact Links
-Find the `<!-- CONTACT -->` section and replace the placeholder links with your real email, GitHub, LinkedIn, and Twitter URLs.
-
-### Colors & Fonts
-Open `style.css` and edit the CSS variables at the top (inside `:root`) to change colors, fonts, and spacing.
-
-## Deploying for Free
-
-You can host this for free on:
-- **GitHub Pages** — push to a repo and enable Pages in settings
-- **Netlify** — drag and drop the folder at netlify.com/drop
-- **Vercel** — import the folder from your GitHub repo
+### 4. Style & Aesthetics
+Open `style.css` and modify the `:root` variables to change the vibe:
+```css
+:root {
+  --primary-color: #2563eb; /* Primary accent color */
+  --bg-color: #ffffff;      /* Background color */
+  --font-main: 'Inter', sans-serif;
+}
