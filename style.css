@@ -283,6 +283,55 @@ img {
   color: var(--clr-primary);
 }
 
+.btn-resume {
+  border: 2px solid var(--clr-primary);
+  color: var(--clr-primary);
+  background: transparent;
+}
+
+.btn-resume:hover {
+  background: var(--clr-primary-bg);
+  border-color: var(--clr-primary);
+  color: var(--clr-primary);
+}
+
+/* ============================================================
+   RESUME (PDF)
+   ============================================================ */
+.resume-frame-wrap {
+  margin-top: 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--clr-border);
+  overflow: hidden;
+  background: var(--clr-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.resume-pdf {
+  display: block;
+  width: 100%;
+  min-height: min(70vh, 900px);
+  border: none;
+}
+
+.resume-fallback {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+}
+
+.resume-fallback a {
+  color: var(--clr-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resume-fallback a:hover {
+  text-decoration: none;
+}
+
 /* ============================================================
    SECTIONS
    ============================================================ */
