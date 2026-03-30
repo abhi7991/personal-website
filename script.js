@@ -92,4 +92,26 @@
       neuToggle.textContent = isOpen ? "View more" : "View less";
     });
   }
+
+  const rhythmToggle = document.getElementById("rhythm-toggle");
+  const rhythmDetails = document.getElementById("rhythm-details");
+  if (rhythmToggle && rhythmDetails) {
+    rhythmToggle.addEventListener("click", () => {
+      const isOpen = !rhythmDetails.hidden;
+      rhythmDetails.hidden = isOpen;
+      rhythmToggle.setAttribute("aria-expanded", !isOpen);
+      rhythmToggle.textContent = isOpen ? "View more" : "View less";
+    });
+  }
+
+  const boehringerToggle = document.getElementById("boehringer-toggle");
+  const boehringerDetails = document.getElementById("boehringer-details");
+  if (boehringerToggle && boehringerDetails) {
+    boehringerToggle.addEventListener("click", () => {
+      const isOpen = !boehringerDetails.hidden;
+      boehringerDetails.hidden = isOpen;
+      boehringerToggle.setAttribute("aria-expanded", !isOpen);
+      boehringerToggle.textContent = isOpen ? "View more" : "View less";
+    });
+  }
 })();
