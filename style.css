@@ -255,6 +255,7 @@ img {
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
+  font-family: inherit;
   transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
 }
 
@@ -293,6 +294,31 @@ img {
   background: var(--clr-primary-bg);
   border-color: var(--clr-primary);
   color: var(--clr-primary);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.ai-summary {
+  margin-top: 24px;
+  padding: 20px 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  box-shadow: var(--shadow-sm);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--clr-text);
+  white-space: pre-wrap;
+}
+
+.ai-summary--error {
+  border-color: #fca5a5;
+  background: #fef2f2;
+  color: #991b1b;
 }
 
 /* ============================================================

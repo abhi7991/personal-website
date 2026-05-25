@@ -114,4 +114,70 @@
       boehringerToggle.textContent = isOpen ? "View more" : "View less";
     });
   }
+
+  // ── AI background summary ─────────────────────────────────
+  const aiSummaryBtn = document.getElementById("ai-summary-btn");
+  const aiSummaryEl = document.getElementById("ai-summary");
+
+  function collectPortfolioText() {
+    const sections = ["hero", "journey", "projects", "interests"];
+    return sections
+      .map((id) => document.getElementById(id))
+      .filter(Boolean)
+      .map((el) => el.innerText.replace(/\s+/g, " ").trim())
+      .filter(Boolean)
+      .join("\n\n");
+  }
+
+  if (aiSummaryBtn && aiSummaryEl) {
+    aiSummaryBtn.addEventListener("click", async () => {
+      const content = collectPortfolioText();
+      if (!content) return;
+
+      aiSummaryBtn.disabled = true;
+      aiSummaryBtn.textContent = "Generating…";
+      aiSummaryEl.hidden = false;
+      aiSummaryEl.classList.remove("ai-summary--error");
+      aiSummaryEl.textContent = "";
+
+      try {
+        const res = await fetch("/api/summarize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ content }),
+        });
+
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || "Could not generate summary.");
+        }
+
+        if (!res.body) {
+          throw new Error("No response stream.");
+        }
+
+        aiSummaryEl.textContent = "";
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          aiSummaryEl.textContent += decoder.decode(value, { stream: true });
+        }
+
+        if (!aiSummaryEl.textContent.trim()) {
+          throw new Error("No summary returned.");
+        }
+      } catch (err) {
+        aiSummaryEl.classList.add("ai-summary--error");
+        aiSummaryEl.textContent =
+          err.message ||
+          "Something went wrong. Run with `vercel dev` locally, or deploy to Vercel with ANTHROPIC_API_KEY set.";
+      } finally {
+        aiSummaryBtn.disabled = false;
+        aiSummaryBtn.textContent = "Generate AI summary";
+      }
+    });
+  }
 })();
