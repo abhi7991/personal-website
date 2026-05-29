@@ -1,5 +1,11 @@
 {
+  "scripts": {
+    "dev:local": "vercel dev"
+  },
   "dependencies": {
     "@vercel/analytics": "^2.0.1"
+  },
+  "devDependencies": {
+    "vercel": "^44.0.0"
   }
 }

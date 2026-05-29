@@ -120,7 +120,7 @@
   const aiSummaryEl = document.getElementById("ai-summary");
 
   function collectPortfolioText() {
-    const sections = ["hero", "journey", "projects", "interests"];
+    const sections = ["intro", "journey", "projects", "interests"];
     return sections
       .map((id) => document.getElementById(id))
       .filter(Boolean)
@@ -130,6 +130,23 @@
   }
 
   if (aiSummaryBtn && aiSummaryEl) {
+    const defaultBtnLabel = aiSummaryBtn.textContent.trim();
+
+    function friendlyFetchError(err) {
+      const msg = err?.message || "";
+      if (msg === "Load failed" || msg === "Failed to fetch") {
+        const isLocal =
+          location.protocol === "file:" ||
+          location.hostname === "localhost" ||
+          location.hostname === "127.0.0.1";
+        if (isLocal) {
+          return "Could not reach the API. Run `npm run dev:local` in this project, then open the localhost URL it prints.";
+        }
+        return "Could not reach the summary API. Check your connection, disable ad blockers for this site, and try again.";
+      }
+      return msg || "Something went wrong generating the summary.";
+    }
+
     aiSummaryBtn.addEventListener("click", async () => {
       const content = collectPortfolioText();
       if (!content) return;
@@ -138,6 +155,7 @@
       aiSummaryBtn.textContent = "Generating…";
       aiSummaryEl.hidden = false;
       aiSummaryEl.classList.remove("ai-summary--error");
+      aiSummaryEl.classList.add("ai-summary--streaming");
       aiSummaryEl.textContent = "";
 
       try {
@@ -156,27 +174,27 @@
           throw new Error("No response stream.");
         }
 
-        aiSummaryEl.textContent = "";
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
+        let summary = "";
 
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-          aiSummaryEl.textContent += decoder.decode(value, { stream: true });
+          summary += decoder.decode(value, { stream: true });
+          aiSummaryEl.textContent = summary;
         }
 
-        if (!aiSummaryEl.textContent.trim()) {
+        if (!summary.trim()) {
           throw new Error("No summary returned.");
         }
       } catch (err) {
         aiSummaryEl.classList.add("ai-summary--error");
-        aiSummaryEl.textContent =
-          err.message ||
-          "Something went wrong. Run with `vercel dev` locally, or deploy to Vercel with ANTHROPIC_API_KEY set.";
+        aiSummaryEl.textContent = friendlyFetchError(err);
       } finally {
+        aiSummaryEl.classList.remove("ai-summary--streaming");
         aiSummaryBtn.disabled = false;
-        aiSummaryBtn.textContent = "Generate AI summary";
+        aiSummaryBtn.textContent = defaultBtnLabel;
       }
     });
   }

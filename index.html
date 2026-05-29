@@ -14,7 +14,7 @@
 <body>
   <!-- ==================== NAVIGATION ==================== -->
   <nav class="navbar" id="navbar">
-    <a href="#hero" class="nav-logo">ABHISHEK</a>
+    <a href="#intro" class="nav-logo">ABHISHEK</a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
@@ -27,28 +27,30 @@
     </ul>
   </nav>
 
-  <!-- ==================== HERO ==================== -->
-  <section class="hero" id="hero">
-    <div class="hero-content">
-      <p class="hero-greeting">Hello, I'm</p>
-      <h1 class="hero-name">Abhishek Shankar</h1>
-      <p class="hero-tagline">AI Engineer &bull;  Generative AI Enthusiast &bull; Lifelong Learner</p>
-      <p class="hero-description">
-        I work at the intersection of AI and Healthcare.
-        My primary focus is on learning, building and exploring trends in computer and data science.
-        Outside of work I love music, movies and enjoy being based in the Bay Area.
-      </p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">See My Work</a>
-        <a href="#contact" class="btn btn-outline">Get In Touch</a>
-        <a href="AbhishekShankar_Resume.pdf" class="btn btn-resume" download="AbhishekShankar_Resume.pdf">Download resume</a>
-        <button type="button" class="btn btn-outline" id="ai-summary-btn">Generate AI summary</button>
+  <!-- ==================== intro ==================== -->
+  <section class="intro" id="intro">
+    <div class="intro-inner">
+      <div class="intro-content">
+        <p class="intro-greeting">Hello, I'm</p>
+        <h1 class="intro-name">Abhishek Shankar</h1>
+        <p class="intro-tagline">AI Engineer &bull;  Generative AI Enthusiast &bull; Lifelong Learner</p>
+        <p class="intro-description">
+          I work at the intersection of AI and Healthcare.
+          My primary focus is on learning, building and exploring trends in computer and data science.
+          Outside of work I love music, movies and enjoy being based in the Bay Area.
+        </p>
+        <div class="intro-actions">
+          <a href="#projects" class="btn btn-primary">See My Work</a>
+          <a href="#contact" class="btn btn-outline">Get In Touch</a>
+          <a href="AbhishekShankar_Resume.pdf" class="btn btn-resume" download="AbhishekShankar_Resume.pdf">Download resume</a>
+          <button type="button" class="btn btn-outline" id="ai-summary-btn">Generate AI Summary</button>
+        </div>
       </div>
-      <div id="ai-summary" class="ai-summary" hidden aria-live="polite"></div>
+      <div class="intro-visual">
+        <img src="AbhishekShankar.jpg" alt="Abhishek Shankar" class="intro-photo" />
+      </div>
     </div>
-    <div class="hero-visual">
-      <img src="AbhishekShankar.jpg" alt="Abhishek Shankar" class="hero-photo" />
-    </div>
+    <div id="ai-summary" class="ai-summary" hidden aria-live="polite"></div>
   </section>
 
   <!-- ==================== JOURNEY ==================== -->

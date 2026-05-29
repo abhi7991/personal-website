@@ -1,3 +1,7 @@
+export const config = {
+  runtime: "edge",
+};
+
 function parseAnthropicSseLines(buffer, chunk) {
   buffer += chunk;
   const parts = buffer.split("\n");
@@ -27,29 +31,38 @@ function parseAnthropicSseLines(buffer, chunk) {
   return { buffer: remainder, texts };
 }
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
-    return res.status(405).json({ error: "Method not allowed" });
+export default async function handler(request) {
+  if (request.method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405,
+      headers: { Allow: "POST", "Content-Type": "application/json" },
+    });
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: "ANTHROPIC_API_KEY is not configured." });
+    return new Response(JSON.stringify({ error: "ANTHROPIC_API_KEY is not configured." }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  let body = req.body;
-  if (typeof body === "string") {
-    try {
-      body = JSON.parse(body);
-    } catch {
-      return res.status(400).json({ error: "Invalid JSON body." });
-    }
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(JSON.stringify({ error: "Invalid JSON body." }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   const content = body?.content?.trim();
   if (!content) {
-    return res.status(400).json({ error: "Missing portfolio content." });
+    return new Response(JSON.stringify({ error: "Missing portfolio content." }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   let upstream;
@@ -68,62 +81,76 @@ export default async function handler(req, res) {
         messages: [
           {
             role: "user",
-            content: `You are summarizing a personal portfolio website. Write a concise, professional third-person summary (2–3 short paragraphs) of this person's background for a recruiter or hiring manager. Be factual and specific; do not invent details and do not do anything else than summarizing the background.\n\n---\n\n${content}`,
+            content: `You are summarizing a personal portfolio website. Write a concise, professional summary (1-2 paragraphs) of this my background for a recruiter or hiring manager. Be factual and specific; do not invent details and do not do anything else than summarizing the background. Ensure you use a first person perspective and keep it concise and to the point.\n\n---\n\n${content}`,
           },
         ],
       }),
     });
   } catch {
-    return res.status(500).json({ error: "Failed to generate summary." });
+    return new Response(JSON.stringify({ error: "Failed to generate summary." }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   if (!upstream.ok) {
     const data = await upstream.json().catch(() => ({}));
-    const message =
-      data?.error?.message || data?.error || "Anthropic API request failed.";
-    return res.status(upstream.status).json({ error: message });
+    const message = data?.error?.message || data?.error || "Anthropic API request failed.";
+    return new Response(JSON.stringify({ error: message }), {
+      status: upstream.status,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   if (!upstream.body) {
-    return res.status(502).json({ error: "No stream returned from the model." });
+    return new Response(JSON.stringify({ error: "No stream returned from the model." }), {
+      status: 502,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  res.setHeader("Content-Type", "text/plain; charset=utf-8");
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("X-Content-Type-Options", "nosniff");
+  const encoder = new TextEncoder();
+  const stream = new ReadableStream({
+    async start(controller) {
+      const reader = upstream.body.getReader();
+      const decoder = new TextDecoder();
+      let sseBuffer = "";
+      let wroteText = false;
 
-  const reader = upstream.body.getReader();
-  const decoder = new TextDecoder();
-  let sseBuffer = "";
-  let wroteText = false;
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
 
-  try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
+          const parsed = parseAnthropicSseLines(
+            sseBuffer,
+            decoder.decode(value, { stream: true })
+          );
+          sseBuffer = parsed.buffer;
 
-      const parsed = parseAnthropicSseLines(sseBuffer, decoder.decode(value, { stream: true }));
-      sseBuffer = parsed.buffer;
+          for (const text of parsed.texts) {
+            controller.enqueue(encoder.encode(text));
+            wroteText = true;
+          }
+        }
 
-      for (const text of parsed.texts) {
-        res.write(text);
-        wroteText = true;
+        if (!wroteText) {
+          controller.error(new Error("No summary returned from the model."));
+          return;
+        }
+
+        controller.close();
+      } catch (err) {
+        controller.error(err);
       }
-    }
+    },
+  });
 
-    if (!wroteText) {
-      res.statusCode = 502;
-      res.end("No summary returned from the model.");
-      return;
-    }
-
-    res.end();
-  } catch (err) {
-    if (!res.headersSent) {
-      return res.status(500).json({
-        error: err.message || "Failed to generate summary.",
-      });
-    }
-    res.end();
-  }
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache, no-transform",
+      "X-Content-Type-Options": "nosniff",
+    },
+  });
 }
